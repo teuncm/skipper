@@ -24,6 +24,12 @@ const recommendations = [
     description: 'Green space, good terraces, and room to slow down.',
     url: 'https://www.google.com/maps/search/?api=1&query=Westerpark%20Amsterdam',
   },
+  {
+    category: 'Explore',
+    name: 'Albert Cuyp Market',
+    description: 'A lively local market for snacks, souvenirs, and people-watching.',
+    url: 'https://www.google.com/maps/search/?api=1&query=Albert%20Cuyp%20Market%20Amsterdam',
+  },
 ]
 
 const copyName = async () => {
@@ -44,10 +50,10 @@ const copyName = async () => {
   <main class="min-h-screen overflow-hidden bg-[#f4f7f6] text-[#15302b]">
     <div class="pointer-events-none fixed inset-x-0 top-0 h-72 bg-gradient-to-b from-[#dbeae6] to-transparent"></div>
 
-    <div class="relative mx-auto flex min-h-screen max-w-5xl flex-col px-5 py-6 sm:px-8 sm:py-10">
-      <section class="grid items-center gap-10 pt-10 pb-16 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
+    <div class="relative mx-auto flex min-h-screen max-w-5xl flex-col px-5 py-4 sm:px-8 sm:py-6">
+      <section class="grid items-center gap-8 py-6 md:grid-cols-[0.9fr_1.1fr] md:gap-12 md:py-8">
         <div>
-          <div class="mb-6 flex items-center gap-4">
+          <div class="mb-5 flex items-center gap-4">
             <div class="relative grid size-24 shrink-0 place-items-center overflow-hidden rounded-[1.6rem] border-4 border-white bg-[#c8dcd7] shadow-lg shadow-[#15302b]/10 sm:size-28">
               <img :src="faceUrl" :alt="`${skipperName}, your skipper`" class="size-full object-cover object-center" />
             </div>
@@ -70,21 +76,21 @@ const copyName = async () => {
           </div>
 
           <h1 class="max-w-md text-4xl font-semibold leading-[1.08] tracking-[-0.045em] sm:text-5xl">How was your time on the water?</h1>
-          <p class="mt-4 max-w-md text-base leading-7 text-[#51706a]">
+          <p class="mt-3 max-w-md text-base leading-7 text-[#51706a]">
             Your feedback helps future guests feel at ease and helps me make every cruise a little better.
           </p>
 
         </div>
 
-        <div class="rounded-[2rem] border border-white/80 bg-white p-6 text-center shadow-[0_24px_70px_-30px_rgba(21,48,43,0.3)] sm:p-10">
-          <div class="mx-auto grid size-14 place-items-center rounded-full bg-[#e2efeb] text-[#2f6d61]">
+        <div class="rounded-[2rem] border border-white/80 bg-white p-5 text-center shadow-[0_24px_70px_-30px_rgba(21,48,43,0.3)] sm:p-7">
+          <div class="mx-auto grid size-12 place-items-center rounded-full bg-[#fff0e8] text-[#e7682f]">
             <svg viewBox="0 0 24 24" class="size-6" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
               <path d="M12 3v15m-4-9h8M6 18c1.2 1.3 3.2 2 6 2s4.8-.7 6-2M9 5h6" stroke-linecap="round" />
             </svg>
           </div>
-          <p class="mt-6 text-xs font-bold uppercase tracking-[0.2em] text-[#d26b4a]">Leave a review</p>
+          <p class="mt-4 text-xs font-bold uppercase tracking-[0.2em] text-[#d26b4a]">Leave a review</p>
           <h2 class="mt-2 text-3xl font-semibold tracking-[-0.04em]">Enjoyed the voyage?</h2>
-          <p class="mx-auto mt-3 max-w-sm leading-7 text-[#617b75]">
+          <p class="mx-auto mt-2 max-w-sm leading-6 text-[#617b75]">
             Share your experience on Google and please mention
             <strong class="font-semibold text-[#15302b]">{{ skipperName }}</strong>
             by name so your feedback reaches me.
@@ -92,7 +98,7 @@ const copyName = async () => {
 
           <button
             type="button"
-            class="mx-auto mt-5 flex items-center gap-2 rounded-full border border-[#15302b]/10 bg-[#f4f7f6] px-4 py-2 text-sm font-semibold text-[#15302b] transition hover:border-[#15302b]/20 hover:bg-[#e9f0ee] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d26b4a]"
+            class="mx-auto mt-4 flex items-center gap-2 rounded-full border border-[#15302b]/10 bg-[#f4f7f6] px-4 py-2 text-sm font-semibold text-[#15302b] transition hover:border-[#15302b]/20 hover:bg-[#e9f0ee] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d26b4a]"
             :aria-label="`Copy ${skipperName}'s name for your review`"
             @click="copyName"
           >
@@ -103,14 +109,14 @@ const copyName = async () => {
             <svg v-else viewBox="0 0 24 24" class="size-4 text-[#d26b4a]" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
               <path d="m5 12 4 4L19 6" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
-            {{ copied ? 'Name copied!' : `Copy “${skipperName}”` }}
+            {{ copied ? 'Name copied!' : `Copy skipper name` }}
           </button>
 
           <a
             :href="googleReviewUrl"
             target="_blank"
             rel="noopener noreferrer"
-            class="group mt-5 flex w-full flex-col items-center justify-center gap-2 rounded-2xl bg-[#15302b] px-5 py-4 transition hover:bg-[#24453f] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d26b4a]"
+            class="group mt-4 flex w-full flex-col items-center justify-center gap-1.5 rounded-2xl bg-[#15302b] px-5 py-3.5 transition hover:bg-[#24453f] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d26b4a]"
             :aria-label="`Leave a five star Google review mentioning ${skipperName}`"
           >
             <span class="flex gap-1 text-[#f3a36f]">
@@ -120,12 +126,12 @@ const copyName = async () => {
             </span>
             <span class="text-sm font-semibold text-white">Review Teun on Google</span>
           </a>
-          <p class="mt-3 text-xs text-[#839792]">Remember to include “{{ skipperName }}” in your review</p>
+          <p class="mt-2 text-xs text-[#839792]">Remember to include “{{ skipperName }}” in your review</p>
         </div>
       </section>
 
-      <section class="border-t border-[#15302b]/10 py-10 sm:py-12" aria-labelledby="recommendations-title">
-        <div class="mb-7 sm:flex sm:items-end sm:justify-between">
+      <section class="border-t border-[#15302b]/10 py-7 sm:py-8" aria-labelledby="recommendations-title">
+        <div class="mb-5 sm:flex sm:items-end sm:justify-between">
           <div>
             <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#d26b4a]">Stay a little longer</p>
             <h2 id="recommendations-title" class="mt-2 text-2xl font-semibold tracking-[-0.03em] sm:text-3xl">Skipper's recommendations</h2>
@@ -133,14 +139,14 @@ const copyName = async () => {
           <p class="mt-2 text-sm text-[#617b75] sm:mt-0">A few favorite stops after your cruise.</p>
         </div>
 
-        <div class="grid gap-3 sm:grid-cols-3">
+        <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           <a
             v-for="recommendation in recommendations"
             :key="recommendation.name"
             :href="recommendation.url"
             target="_blank"
             rel="noopener noreferrer"
-            class="group rounded-2xl border border-[#15302b]/8 bg-white/65 p-5 transition hover:-translate-y-0.5 hover:border-[#15302b]/15 hover:bg-white hover:shadow-lg hover:shadow-[#15302b]/5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d26b4a]"
+            class="group rounded-2xl border border-[#15302b]/8 bg-white/65 p-4 transition hover:-translate-y-0.5 hover:border-[#15302b]/15 hover:bg-white hover:shadow-lg hover:shadow-[#15302b]/5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d26b4a]"
           >
             <div class="flex items-start justify-between gap-4">
               <span class="text-[10px] font-bold uppercase tracking-[0.18em] text-[#d26b4a]">{{ recommendation.category }}</span>
@@ -148,7 +154,7 @@ const copyName = async () => {
                 <path d="M7 17 17 7M8 7h9v9" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </div>
-            <h3 class="mt-5 text-lg font-semibold tracking-[-0.02em]">{{ recommendation.name }}</h3>
+            <h3 class="mt-3 text-lg font-semibold tracking-[-0.02em]">{{ recommendation.name }}</h3>
             <p class="mt-1 text-sm leading-6 text-[#617b75]">{{ recommendation.description }}</p>
           </a>
         </div>
