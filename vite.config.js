@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://vite.dev/config/
 export default defineConfig({
-  // The custom GitHub Pages domain serves the site from its root.
-  base: "/",
+  // This project page is served at https://teuncm.nl/skipper/.
+  base: "/skipper/",
   plugins: [vue(), tailwindcss()],
 });

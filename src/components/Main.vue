@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 
 const skipperName = 'Teun Mathijssen'
+const faceUrl = `${import.meta.env.BASE_URL}face.jpg`
 const copied = ref(false)
 const googleReviewUrl = 'https://www.google.com/maps/search/?api=1&query=Flagship%20Amsterdam'
 const recommendations = [
@@ -48,7 +49,7 @@ const copyName = async () => {
         <div>
           <div class="mb-6 flex items-center gap-4">
             <div class="relative grid size-24 shrink-0 place-items-center overflow-hidden rounded-[1.6rem] border-4 border-white bg-[#c8dcd7] shadow-lg shadow-[#15302b]/10 sm:size-28">
-              <img src="/face.jpg" :alt="`${skipperName}, your skipper`" class="size-full object-cover object-center" />
+              <img :src="faceUrl" :alt="`${skipperName}, your skipper`" class="size-full object-cover object-center" />
             </div>
             <div>
               <p class="mb-1 text-xs font-bold uppercase tracking-[0.2em] text-[#d26b4a]">Your skipper</p>
