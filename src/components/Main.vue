@@ -71,7 +71,7 @@ const copyName = async () => {
     <div class="pointer-events-none fixed inset-x-0 top-0 h-72 bg-gradient-to-b from-[#dbeae6] to-transparent"></div>
 
     <div class="relative mx-auto flex min-h-screen max-w-5xl flex-col px-5 py-2 sm:px-8 sm:py-3">
-      <section class="grid items-center gap-6 py-4 md:grid-cols-[0.9fr_1.1fr] md:gap-10 md:py-5">
+      <section class="grid items-center gap-9 py-4 md:grid-cols-[0.9fr_1.1fr] md:gap-10 md:py-5">
         <div>
           <div class="flex items-center gap-4">
             <div class="relative grid size-24 shrink-0 place-items-center overflow-hidden rounded-[1.6rem] border-4 border-white bg-[#c8dcd7] shadow-lg shadow-[#15302b]/10 sm:size-28">
@@ -93,15 +93,13 @@ const copyName = async () => {
         </div>
 
         <div class="rounded-[2rem] border border-white/80 bg-white p-4 text-center shadow-[0_24px_70px_-30px_rgba(21,48,43,0.3)] sm:p-5">
-          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#d26b4a]">Please leave a review</p>
-          <h2 class="mt-1 text-2xl font-semibold tracking-[-0.04em]">Enjoyed the voyage?</h2>
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#d26b4a]">First: please leave a review!</p>
+          <h2 class="mt-1 text-2xl font-semibold tracking-[-0.03em]">Enjoyed the voyage?</h2>
           <p class="mx-auto mt-1.5 max-w-sm text-sm leading-5 text-[#617b75]">
-            Share your experience and please mention
-            <strong class="font-semibold text-[#15302b]">{{ skipperName }}</strong>
-            by name so your feedback reaches me. I appreciate it! 😊
+            Share your experience and mention my name so your feedback reaches me. I appreciate it 😊
           </p>
 
-          <div class="mt-3 grid grid-cols-[2rem_1fr] items-center gap-x-3 gap-y-2">
+          <div class="mt-3 grid grid-cols-[2rem_1fr] items-center gap-x-3 gap-y-4">
             <span class="grid size-8 place-items-center rounded-full bg-[#15302b] text-xs font-bold text-white" aria-hidden="true">1</span>
             <button
               type="button"
@@ -117,11 +115,11 @@ const copyName = async () => {
               <svg v-else viewBox="0 0 24 24" class="size-4 text-[#d26b4a]" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
                 <path d="m5 12 4 4L19 6" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
-              {{ copied ? 'Name copied!' : `Copy skipper name` }}
+              {{ copied ? 'Name copied!' : `Click to copy my name` }}
             </button>
 
             <span class="grid size-8 place-items-center rounded-full bg-[#15302b] text-xs font-bold text-white" aria-hidden="true">2</span>
-            <div class="grid items-center gap-2 sm:grid-cols-[1fr_auto_1fr]">
+            <div class="grid items-center gap-2 sm:grid-cols-2">
               <a
                 :href="googleReviewUrl"
                 target="_blank"
@@ -136,7 +134,6 @@ const copyName = async () => {
                 </span>
                 <span class="text-sm font-semibold text-white">Google review</span>
               </a>
-              <span class="h-px w-full bg-[#15302b]/10 sm:h-8 sm:w-px" aria-hidden="true"></span>
               <a
                 :href="tripadvisorReviewUrl"
                 target="_blank"
@@ -156,11 +153,11 @@ const copyName = async () => {
         </div>
       </section>
 
-      <section class="border-t border-[#15302b]/10 py-4" aria-labelledby="recommendations-title">
+      <section class="pt-6 pb-4" aria-labelledby="recommendations-title">
         <div class="mb-3 sm:flex sm:items-end sm:justify-between">
           <div>
             <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#d26b4a]">Next: stay a little longer</p>
-            <h2 id="recommendations-title" class="mt-1 text-2xl font-semibold tracking-[-0.03em] sm:text-3xl">Skipper's recommendations</h2>
+            <h2 id="recommendations-title" class="mt-1 text-2xl font-semibold tracking-[-0.03em]">Skipper's recommendations</h2>
           </div>
           <p class="mt-1 text-sm text-[#617b75] sm:mt-0">A few favorite stops after your cruise.</p>
         </div>
@@ -186,14 +183,14 @@ const copyName = async () => {
                     <circle cx="18" cy="17" r="3.5" />
                     <path d="m6 17 4-8h4l4 8M9 12h7M12 9l-2-3h3" stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
-                  Activity
+                  Real Amsterdam Experience
                 </span>
               </div>
               <svg viewBox="0 0 24 24" class="size-4 text-[#8da09c] transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[#15302b]" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <path d="M7 17 17 7M8 7h9v9" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </div>
-            <h3 class="mt-1 text-base font-semibold tracking-[-0.02em]">{{ recommendation.name }}</h3>
+            <h3 class="mt-1 text-base font-normal tracking-[-0.02em]">{{ recommendation.name }}</h3>
             <p class="mt-0.5 text-sm leading-5 text-[#617b75]">{{ recommendation.description }}</p>
           </a>
         </div>
