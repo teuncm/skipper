@@ -14,7 +14,7 @@ textarea {
 }
 
 .rating-glow {
-  animation: rating-pulse 3.2s ease-in-out infinite;
+  animation: rating-pulse 3s ease-in-out infinite;
   will-change: filter, transform;
 }
 
