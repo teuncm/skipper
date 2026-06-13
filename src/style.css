@@ -12,3 +12,32 @@ button,
 textarea {
   font: inherit;
 }
+
+.rating-glow {
+  animation: rating-pulse 3.2s ease-in-out infinite;
+  will-change: filter, transform;
+}
+
+.rating-glow-tripadvisor {
+  animation-delay: 0.55s;
+}
+
+@keyframes rating-pulse {
+  0%,
+  18%,
+  100% {
+    filter: brightness(1);
+    transform: scale(1);
+  }
+
+  9% {
+    filter: brightness(1.4) drop-shadow(0 0 10px currentColor);
+    transform: scale(1.07);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rating-glow {
+    animation: none;
+  }
+}
