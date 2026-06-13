@@ -77,15 +77,15 @@ const copyName = async () => {
             <div class="relative grid size-24 shrink-0 place-items-center overflow-hidden rounded-[1.6rem] border-4 border-white bg-[#c8dcd7] shadow-lg shadow-[#15302b]/10 sm:size-28">
               <img :src="faceUrl" :alt="`${skipperName}, your skipper`" class="size-full object-cover object-center" />
             </div>
-            <div class="flex items-center gap-3">
-              <div class="grid size-10 shrink-0 place-items-center rounded-full bg-[#fff0e8] text-[#e7682f]">
-                <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <div class="min-w-0 flex items-center gap-2">
+              <div class="grid size-8 shrink-0 place-items-center rounded-full bg-[#fff0e8] text-[#e7682f]">
+                <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
                   <path d="M12 3v15m-4-9h8M6 18c1.2 1.3 3.2 2 6 2s4.8-.7 6-2M9 5h6" stroke-linecap="round" />
                 </svg>
               </div>
               <div>
               <p class="mb-1 text-xs font-bold uppercase tracking-[0.2em] text-[#d26b4a]">Your skipper</p>
-              <p class="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">{{ skipperName }}</p>
+              <p class="text-2xl font-semibold tracking-[-0.04em] min-[380px]:text-3xl sm:text-4xl">{{ skipperName }}</p>
               </div>
             </div>
           </div>
