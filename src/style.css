@@ -47,7 +47,7 @@ textarea {
   --star-delay: 0s;
   --star-duration: 2.4s;
   --star-drift: 0rem;
-  --star-size: 1.5rem;
+  --star-size: 2rem;
   position: absolute;
   left: var(--star-left);
   top: -2rem;
@@ -62,7 +62,7 @@ textarea {
   --star-delay: 0.1s;
   --star-duration: 2.1s;
   --star-drift: 4rem;
-  --star-size: 1.2rem;
+  --star-size: 1.6rem;
 }
 
 .review-celebration-rain span:nth-child(8n + 2) {
@@ -70,7 +70,7 @@ textarea {
   --star-delay: 0.55s;
   --star-duration: 2.7s;
   --star-drift: -3rem;
-  --star-size: 1.8rem;
+  --star-size: 2.4rem;
 }
 
 .review-celebration-rain span:nth-child(8n + 3) {
@@ -78,7 +78,7 @@ textarea {
   --star-delay: 0.25s;
   --star-duration: 2.4s;
   --star-drift: 2rem;
-  --star-size: 1rem;
+  --star-size: 1.35rem;
 }
 
 .review-celebration-rain span:nth-child(8n + 4) {
@@ -86,7 +86,7 @@ textarea {
   --star-delay: 0.9s;
   --star-duration: 2.2s;
   --star-drift: -5rem;
-  --star-size: 1.5rem;
+  --star-size: 2rem;
 }
 
 .review-celebration-rain span:nth-child(8n + 5) {
@@ -94,7 +94,7 @@ textarea {
   --star-delay: 0.4s;
   --star-duration: 2.8s;
   --star-drift: 3rem;
-  --star-size: 2rem;
+  --star-size: 2.7rem;
 }
 
 .review-celebration-rain span:nth-child(8n + 6) {
@@ -102,7 +102,7 @@ textarea {
   --star-delay: 0.05s;
   --star-duration: 2.5s;
   --star-drift: -2rem;
-  --star-size: 1.15rem;
+  --star-size: 1.55rem;
 }
 
 .review-celebration-rain span:nth-child(8n + 7) {
@@ -110,7 +110,7 @@ textarea {
   --star-delay: 0.7s;
   --star-duration: 2.3s;
   --star-drift: 5rem;
-  --star-size: 1.7rem;
+  --star-size: 2.3rem;
 }
 
 .review-celebration-rain span:nth-child(8n) {
@@ -118,7 +118,7 @@ textarea {
   --star-delay: 0.3s;
   --star-duration: 2.6s;
   --star-drift: -4rem;
-  --star-size: 1.35rem;
+  --star-size: 1.8rem;
 }
 
 .review-celebration-rain span:nth-child(n + 9) {

@@ -7,9 +7,14 @@ const copied = ref(false)
 const showManualCopy = ref(false)
 const manualCopyInput = ref(null)
 const showReviewThanks = ref(false)
+const showReviewMessage = ref(false)
 const reviewPlatform = ref('google')
+const celebrationRun = ref(0)
 let waitingForReviewReturn = false
+let leftForReview = false
 let thankYouTimer
+let thankYouMessageTimer
+let returnCheckTimer
 const googleReviewUrl = 'https://www.google.com/maps/search/?api=1&query=Flagship%20Amsterdam%20Leliegracht'
 const tripadvisorReviewUrl = 'https://www.tripadvisor.com/UserReviewEdit-g188590-d13998700-Flagship_Amsterdam-Amsterdam_North_Holland_Province.html'
 const recommendations = [
@@ -101,30 +106,65 @@ const copyName = async () => {
   manualCopyInput.value?.select()
 }
 
-const showThankYou = () => {
-  if (!waitingForReviewReturn || document.visibilityState === 'hidden') return
+const completeReviewReturn = () => {
+  if (!waitingForReviewReturn || !leftForReview || document.visibilityState === 'hidden' || !document.hasFocus()) return
 
   waitingForReviewReturn = false
+  leftForReview = false
+  celebrationRun.value += 1
   showReviewThanks.value = true
+  showReviewMessage.value = true
   clearTimeout(thankYouTimer)
+  clearTimeout(thankYouMessageTimer)
+  thankYouMessageTimer = setTimeout(() => {
+    showReviewMessage.value = false
+  }, 3500)
   thankYouTimer = setTimeout(() => {
     showReviewThanks.value = false
-  }, 4500)
+  }, 6500)
   window.removeEventListener('focus', showThankYou)
-  document.removeEventListener('visibilitychange', showThankYou)
+  window.removeEventListener('blur', trackReviewBlur)
+  document.removeEventListener('visibilitychange', trackReviewVisibility)
+}
+
+const showThankYou = () => {
+  clearTimeout(returnCheckTimer)
+  returnCheckTimer = setTimeout(completeReviewReturn, 100)
+}
+
+const trackReviewVisibility = () => {
+  if (document.visibilityState === 'hidden') {
+    leftForReview = true
+  } else if (leftForReview) {
+    showThankYou()
+  }
+}
+
+const trackReviewBlur = () => {
+  leftForReview = true
 }
 
 const startReview = (platform) => {
+  clearTimeout(returnCheckTimer)
+  window.removeEventListener('focus', showThankYou)
+  window.removeEventListener('blur', trackReviewBlur)
+  document.removeEventListener('visibilitychange', trackReviewVisibility)
+
   reviewPlatform.value = platform
   waitingForReviewReturn = true
+  leftForReview = false
   window.addEventListener('focus', showThankYou)
-  document.addEventListener('visibilitychange', showThankYou)
+  window.addEventListener('blur', trackReviewBlur, { once: true })
+  document.addEventListener('visibilitychange', trackReviewVisibility)
 }
 
 onBeforeUnmount(() => {
   clearTimeout(thankYouTimer)
+  clearTimeout(thankYouMessageTimer)
+  clearTimeout(returnCheckTimer)
   window.removeEventListener('focus', showThankYou)
-  document.removeEventListener('visibilitychange', showThankYou)
+  window.removeEventListener('blur', trackReviewBlur)
+  document.removeEventListener('visibilitychange', trackReviewVisibility)
 })
 
 </script>
@@ -134,7 +174,7 @@ onBeforeUnmount(() => {
     <div class="pointer-events-none fixed inset-x-0 top-0 h-72 bg-gradient-to-b from-[#dbeae6] to-transparent"></div>
 
     <Transition name="review-thanks">
-      <div v-if="showReviewThanks" class="pointer-events-none fixed inset-0 z-50" role="status">
+      <div v-if="showReviewThanks" :key="celebrationRun" class="pointer-events-none fixed inset-0 z-50" role="status">
         <div
           class="review-celebration-rain absolute inset-0 overflow-hidden"
           :class="reviewPlatform === 'tripadvisor' ? 'text-[#34e0a1]' : 'text-[#f4c95d]'"
@@ -142,24 +182,25 @@ onBeforeUnmount(() => {
         >
           <span v-for="item in 32" :key="item">{{ reviewPlatform === 'tripadvisor' ? '●' : '★' }}</span>
         </div>
-        <div class="absolute inset-x-4 top-4 mx-auto max-w-sm overflow-hidden rounded-2xl border border-white/80 bg-[#15302b] px-5 py-4 text-center text-white shadow-2xl shadow-[#15302b]/25">
-          <div class="relative">
-            <svg
-              viewBox="0 0 24 24"
-              class="review-thanks-check mx-auto size-8"
-              :class="reviewPlatform === 'tripadvisor' ? 'text-[#34e0a1]' : 'text-[#f4c95d]'"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.2"
-              aria-hidden="true"
-            >
-              <circle cx="12" cy="12" r="9" />
-              <path d="m8 12 2.5 2.5L16.5 9" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            <p class="mt-1 text-lg font-bold">Thank you!</p>
-            <p class="mt-0.5 text-sm text-[#c8dcd7]">Your review means a lot to me.</p>
+        <Transition name="review-thanks">
+          <div v-if="showReviewMessage" class="absolute inset-x-4 top-4 mx-auto max-w-sm overflow-hidden rounded-2xl border border-white/90 bg-[#fffaf7] px-5 py-4 text-center text-[#15302b] shadow-2xl shadow-[#15302b]/20">
+            <div class="relative">
+              <svg
+                viewBox="0 0 24 24"
+                class="review-thanks-check mx-auto size-8 text-[#e7682f]"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="9" />
+                <path d="m8 12 2.5 2.5L16.5 9" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <p class="mt-1 text-lg font-bold">Thank you!</p>
+              <p class="mt-0.5 text-sm text-[#617b75]">Your review means a lot to me.</p>
+            </div>
           </div>
-        </div>
+        </Transition>
       </div>
     </Transition>
 
