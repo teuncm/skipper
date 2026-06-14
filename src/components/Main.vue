@@ -187,7 +187,7 @@ onBeforeUnmount(() => {
 
         <div class="rounded-[2rem] border border-white/80 bg-white p-4 text-center shadow-[0_24px_70px_-30px_rgba(21,48,43,0.3)] sm:p-5">
           <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#d26b4a]">Leave a review</p>
-          <h2 class="mt-1 text-2xl font-bold tracking-[-0.03em]">Enjoyed the voyage?</h2>
+          <h2 class="mt-1 text-2xl font-bold tracking-[-0.03em]">Enjoyed your voyage?</h2>
           <p class="mx-auto mt-1.5 max-w-sm text-sm leading-5 text-[#617b75]">
             Share your experience and mention me so your feedback reaches me. Thank you 😊
           </p>
