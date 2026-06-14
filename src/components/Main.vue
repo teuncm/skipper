@@ -402,6 +402,44 @@ onBeforeUnmount(() => {
         </div>
       </section>
 
+      <nav class="mb-4 flex items-center justify-center gap-3 rounded-2xl border border-[#15302b]/10 px-4 py-3" aria-label="Teun's social profiles">
+        <a
+          href="https://www.linkedin.com/in/teun-mathijssen/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="grid size-10 place-items-center rounded-full text-[#617b75] transition hover:bg-[#0a66c2]/8 hover:text-[#0a66c2] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d26b4a]"
+          aria-label="Teun on LinkedIn"
+        >
+          <svg viewBox="0 0 24 24" class="size-6" fill="currentColor" aria-hidden="true">
+            <path d="M6.5 8.3H3.2V19h3.3V8.3ZM4.9 3A1.9 1.9 0 1 0 5 6.8 1.9 1.9 0 0 0 4.9 3ZM19 12.9c0-3.2-1.7-4.9-4.1-4.9a3.5 3.5 0 0 0-3.2 1.8V8.3H8.4V19h3.3v-5.3c0-1.4.3-2.8 2.1-2.8s1.9 1.6 1.9 2.9V19H19v-6.1Z" />
+          </svg>
+        </a>
+        <a
+          href="https://www.instagram.com/teuncm"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="grid size-10 place-items-center rounded-full text-[#617b75] transition hover:bg-[#d26b4a]/8 hover:text-[#d26b4a] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d26b4a]"
+          aria-label="Teun on Instagram"
+        >
+          <svg viewBox="0 0 24 24" class="size-6" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+            <circle cx="12" cy="12" r="4" />
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+          </svg>
+        </a>
+        <a
+          href="https://github.com/teuncm/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="grid size-10 place-items-center rounded-full text-[#617b75] transition hover:bg-[#15302b]/8 hover:text-[#15302b] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d26b4a]"
+          aria-label="Teun on GitHub"
+        >
+          <svg viewBox="0 0 24 24" class="size-6" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.9c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 0 1.6 1.1 1.6 1.1.9 1.6 2.4 1.1 2.9.9.1-.7.4-1.1.7-1.4-2.2-.3-4.6-1.1-4.6-5A3.9 3.9 0 0 1 6.7 8.7c-.1-.3-.4-1.3.1-2.7 0 0 .9-.3 2.8 1.1a9.6 9.6 0 0 1 5.1 0C16.7 5.7 17.5 6 17.5 6c.6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1.1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.8V21c0 .3.2.6.7.5A10 10 0 0 0 12 2Z" clip-rule="evenodd" />
+          </svg>
+        </a>
+      </nav>
+
     </div>
   </main>
 </template>
