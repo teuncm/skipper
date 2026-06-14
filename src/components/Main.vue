@@ -9,6 +9,7 @@ const manualCopyInput = ref(null)
 const showReviewThanks = ref(false)
 const showReviewMessage = ref(false)
 const reviewPlatform = ref('google')
+const celebrationType = ref('review')
 const celebrationRun = ref(0)
 let waitingForReviewReturn = false
 let leftForReview = false
@@ -17,6 +18,8 @@ let thankYouMessageTimer
 let returnCheckTimer
 const googleReviewUrl = 'https://www.google.com/maps/search/?api=1&query=Flagship%20Amsterdam%20Leliegracht'
 const tripadvisorReviewUrl = 'https://www.tripadvisor.com/UserReviewEdit-g188590-d13998700-Flagship_Amsterdam-Amsterdam_North_Holland_Province.html'
+const paypalTipUrl = 'https://www.paypal.me/TeunMathijssen'
+const revolutTipUrl = 'https://revolut.me/teunkuo6q'
 const recommendations = [
   {
     category: 'Bike',
@@ -144,13 +147,14 @@ const trackReviewBlur = () => {
   leftForReview = true
 }
 
-const startReview = (platform) => {
+const startCelebration = (platform, type = 'review') => {
   clearTimeout(returnCheckTimer)
   window.removeEventListener('focus', showThankYou)
   window.removeEventListener('blur', trackReviewBlur)
   document.removeEventListener('visibilitychange', trackReviewVisibility)
 
   reviewPlatform.value = platform
+  celebrationType.value = type
   waitingForReviewReturn = true
   leftForReview = false
   window.addEventListener('focus', showThankYou)
@@ -177,10 +181,12 @@ onBeforeUnmount(() => {
       <div v-if="showReviewThanks" :key="celebrationRun" class="pointer-events-none fixed inset-0 z-50" role="status">
         <div
           class="review-celebration-rain absolute inset-0 overflow-hidden"
-          :class="reviewPlatform === 'tripadvisor' ? 'text-[#34e0a1]' : 'text-[#f4c95d]'"
+          :class="celebrationType === 'tip'
+            ? (reviewPlatform === 'paypal' ? 'text-[#0070ba]' : 'text-[#15302b]')
+            : (reviewPlatform === 'tripadvisor' ? 'text-[#34e0a1]' : 'text-[#f4c95d]')"
           aria-hidden="true"
         >
-          <span v-for="item in 32" :key="item">{{ reviewPlatform === 'tripadvisor' ? '●' : '★' }}</span>
+          <span v-for="item in 32" :key="item">{{ celebrationType === 'tip' ? '▲' : (reviewPlatform === 'tripadvisor' ? '●' : '★') }}</span>
         </div>
         <Transition name="review-thanks">
           <div v-if="showReviewMessage" class="absolute inset-x-4 top-4 mx-auto max-w-sm overflow-hidden rounded-2xl border border-white/90 bg-[#fffaf7] px-5 py-4 text-center text-[#15302b] shadow-2xl shadow-[#15302b]/20">
@@ -188,7 +194,9 @@ onBeforeUnmount(() => {
               <svg
                 viewBox="0 0 24 24"
                 class="review-thanks-check mx-auto size-8"
-                :class="reviewPlatform === 'tripadvisor' ? 'text-[#34e0a1]' : 'text-[#fbbc04]'"
+                :class="celebrationType === 'tip'
+                  ? (reviewPlatform === 'paypal' ? 'text-[#0070ba]' : 'text-[#15302b]')
+                  : (reviewPlatform === 'tripadvisor' ? 'text-[#34e0a1]' : 'text-[#fbbc04]')"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2.2"
@@ -198,7 +206,7 @@ onBeforeUnmount(() => {
                 <path d="m8 12 2.5 2.5L16.5 9" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
               <p class="mt-1 text-lg font-bold">Thank you!</p>
-              <p class="mt-0.5 text-sm text-[#617b75]">Your review means a lot to me.</p>
+              <p class="mt-0.5 text-sm text-[#617b75]">{{ celebrationType === 'tip' ? 'Your tip means a lot to me.' : 'Your review means a lot to me.' }}</p>
             </div>
           </div>
         </Transition>
@@ -206,7 +214,7 @@ onBeforeUnmount(() => {
     </Transition>
 
     <div class="relative mx-auto flex min-h-screen max-w-5xl flex-col px-5 py-2 sm:px-8 sm:py-3">
-      <section class="grid items-center gap-9 py-4 md:grid-cols-[0.9fr_1.1fr] md:gap-10 md:py-5">
+      <section class="grid items-center gap-5 py-4 md:grid-cols-[0.9fr_1.1fr] md:gap-10 md:py-5">
         <div>
           <div class="flex items-center gap-4">
             <div class="relative grid size-24 shrink-0 place-items-center overflow-hidden rounded-[1.6rem] border-4 border-white bg-[#c8dcd7] shadow-lg shadow-[#15302b]/10 sm:size-28">
@@ -276,7 +284,7 @@ onBeforeUnmount(() => {
                 rel="noopener noreferrer"
                 class="group relative flex w-full flex-col items-center justify-center gap-1.5 rounded-2xl bg-[#3f4d61] px-4 py-3.5 transition hover:bg-[#334052] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d26b4a]"
                 :aria-label="`Step 2: Leave a five star Google review mentioning ${skipperName}`"
-                @click="startReview('google')"
+                @click="startCelebration('google')"
               >
                 <span class="rating-glow rating-glow-google flex gap-1 text-[#fbbc04] drop-shadow-[0_2px_4px_rgba(251,188,4,0.35)] transition duration-200 group-hover:drop-shadow-[0_0_10px_rgba(251,188,4,0.8)]">
                   <svg v-for="star in 5" :key="star" viewBox="0 0 24 24" class="size-5 transition duration-200 group-hover:-translate-y-0.5 group-hover:scale-110" fill="currentColor" aria-hidden="true">
@@ -294,7 +302,7 @@ onBeforeUnmount(() => {
                 rel="noopener noreferrer"
                 class="group relative flex w-full flex-col items-center justify-center gap-1.5 rounded-2xl bg-[#24584b] px-4 py-3.5 transition hover:bg-[#1c493e] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#34e0a1]"
                 :aria-label="`Step 2: Find Flagship Amsterdam on TripAdvisor and leave a review mentioning ${skipperName}`"
-                @click="startReview('tripadvisor')"
+                @click="startCelebration('tripadvisor')"
               >
                 <span class="rating-glow rating-glow-tripadvisor flex gap-1 text-[#34e0a1] drop-shadow-[0_2px_4px_rgba(52,224,161,0.35)] transition duration-200 group-hover:drop-shadow-[0_0_10px_rgba(52,224,161,0.8)]">
                   <svg v-for="star in 5" :key="star" viewBox="0 0 24 24" class="size-5 transition duration-200 group-hover:-translate-y-0.5 group-hover:scale-110" fill="currentColor" aria-hidden="true">
@@ -307,6 +315,47 @@ onBeforeUnmount(() => {
                 </svg>
               </a>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="rounded-[2rem] border border-white/80 bg-white p-4 text-center shadow-[0_24px_70px_-30px_rgba(21,48,43,0.3)] sm:p-5" aria-labelledby="tip-title">
+        <div class="mx-auto max-w-xl">
+          <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#d26b4a]">Leave a tip</p>
+          <h2 id="tip-title" class="mt-1 text-2xl font-bold tracking-[-0.03em]">Fancy buying me a drink?</h2>
+          <p class="mx-auto mt-1.5 max-w-md text-sm leading-5 text-[#617b75]">
+            Tips are deeply appreciated!
+          </p>
+
+          <div class="mt-4 grid gap-2 sm:grid-cols-2">
+            <a
+              :href="revolutTipUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group relative flex w-full items-center justify-center gap-2 rounded-2xl bg-[#15302b] px-4 py-3.5 text-sm font-semibold text-white transition hover:bg-[#0c211d] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d26b4a]"
+              aria-label="Tip Teun with Revolut"
+              @click="startCelebration('revolut', 'tip')"
+            >
+              <span class="tip-icon-glow rating-glow-revolut grid size-7 place-items-center rounded-full bg-white/20 text-sm font-bold text-white" aria-hidden="true">R</span>
+              Tip with Revolut
+              <svg viewBox="0 0 24 24" class="absolute right-3 size-4 text-white/60 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M7 17 17 7M8 7h9v9" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+            <a
+              :href="paypalTipUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group relative flex w-full items-center justify-center gap-2 rounded-2xl bg-[#0070ba] px-4 py-3.5 text-sm font-semibold text-white transition hover:bg-[#005ea6] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d26b4a]"
+              aria-label="Tip Teun with PayPal"
+              @click="startCelebration('paypal', 'tip')"
+            >
+              <span class="tip-icon-glow rating-glow-paypal grid size-7 place-items-center rounded-full bg-white/20 text-sm font-bold italic text-white" aria-hidden="true">P</span>
+              Tip with PayPal
+              <svg viewBox="0 0 24 24" class="absolute right-3 size-4 text-white/60 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M7 17 17 7M8 7h9v9" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
           </div>
         </div>
       </section>
