@@ -187,7 +187,8 @@ onBeforeUnmount(() => {
             <div class="relative">
               <svg
                 viewBox="0 0 24 24"
-                class="review-thanks-check mx-auto size-8 text-[#e7682f]"
+                class="review-thanks-check mx-auto size-8"
+                :class="reviewPlatform === 'tripadvisor' ? 'text-[#34e0a1]' : 'text-[#fbbc04]'"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2.2"
@@ -234,7 +235,7 @@ onBeforeUnmount(() => {
           </p>
 
           <div class="mt-3 grid grid-cols-[2rem_1fr] items-center gap-x-3 gap-y-4">
-            <span class="grid size-8 place-items-center rounded-full bg-[#15302b] text-xs font-bold text-white" aria-hidden="true">1</span>
+            <span class="grid size-8 place-items-center rounded-full border border-[#d26b4a]/20 bg-[#fff0e8] text-xs font-bold text-[#d26b4a]" aria-hidden="true">1</span>
             <button
               type="button"
               :disabled="copied"
@@ -267,7 +268,7 @@ onBeforeUnmount(() => {
               />
             </div>
 
-            <span class="grid size-8 place-items-center rounded-full bg-[#15302b] text-xs font-bold text-white" aria-hidden="true">2</span>
+            <span class="grid size-8 place-items-center rounded-full border border-[#d26b4a]/20 bg-[#fff0e8] text-xs font-bold text-[#d26b4a]" aria-hidden="true">2</span>
             <div class="grid items-center gap-2 sm:grid-cols-2">
               <a
                 :href="googleReviewUrl"
